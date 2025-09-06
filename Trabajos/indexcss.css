@@ -1,0 +1,17 @@
+header{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    border-bottom: solid 2px black;
+
+}
+
+.titulos h3, .titulos button{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.titulos button{
+    padding: 12px;
+    width: 200px;
+    border-radius: 10px;
+
+}
