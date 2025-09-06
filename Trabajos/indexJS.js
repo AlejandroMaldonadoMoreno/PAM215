@@ -23,14 +23,19 @@ class inicioPAM {
         </ol>`;
     }
 
-    LineamientosClassroom (){
+    LineamientosClassroom() {
         return `
         <ul>
-            <li> Portada libre con logo de la UPQ</li>
-            <li> Datos del alumno y materia</li>
-            <li> Conclusión de aprendizaje</li>
-            <li> Archivo en PDF</li>
-        </ul>`;
+            <li>Participación activa en clase</li>
+            <li>Trabajos en classroom</li>
+            <li>Entregas completas</li>
+            <li>Respetar tiempos de entrega</li>
+            <li>Presentación de trabajo calidad universitaria</li>
+        </ul>
+        <p>Todos los trabajos llevan portada estilo libre: Logo UPQ, tema, datos de alumno, materia</p>
+        <p>Conclusiones de aprendizaje: Descripción de lo aprendido durante el desarrollo de la actividad</p>
+        <p>No usar chat en prácticas o examen</p>
+    `;
     }
 
     FechasdeParciales(){
