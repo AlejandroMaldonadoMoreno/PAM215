@@ -1,28 +1,22 @@
 //1. imports: Zonas de importaciones
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button} from 'react-native';
-import React, {useState} from 'react';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import React, { useState } from 'react';
 
 //2. Main: Zona de componentes
-export default function contadorScreen() {
-    const[contador, setContador]=useState(0);
+export default function ContadorScreen() {
+    const [contador, setContador] = useState(0);
 
     return (
-
         <View style={styles.container}>
             <Text style={styles.texto}>Contador</Text>
             <Text style={styles.texto2}>{contador}</Text>
 
             <View style={styles.contenedorBotones}>
-                <Button color={'blue'} title={'Incrementar'} onPress={()=>setContador(contador+1)}> </Button>
-                <Button color={'green'} title={'Reiniciar'} onPress={()=>setContador(contador-contador)}></Button>
-                <Button color={'red'} title={'Decrementar'} onPress={()=>setContador(contador-1)}></Button>
+                <Button color={'blue'} title={'Incrementar'} onPress={() => setContador(contador + 1)} />
+                <Button color={'green'} title={'Reiniciar'} onPress={() => setContador(0)} />
+                <Button color={'red'} title={'Decrementar'} onPress={() => setContador(contador - 1)} />
             </View>
-
-            <StatusBar style="auto" />
         </View>
-
-
     );
 }
 
