@@ -9,7 +9,7 @@ import ScrollViewScreen from "./ScrollViewScreen";
 import ActivityIndicatorScreen from "./ActivityIndicatorScreen";
 import FlatListScreen from "./FlatListScreen";
 import Bottomcreen from "./BottomScreen";
-import Modal from "./Modal";
+import ModalScreen from "./ModalScreen";
 
 //2. Main: Zona de componentes
 export default function MenuScreen() {
@@ -31,8 +31,8 @@ export default function MenuScreen() {
             return <ActivityIndicatorScreen />;
         case 'FlatList':
             return <FlatListScreen />;
-        case 'Modal':
-            return <Modal/>;
+        case 'ModalScreen':
+            return <ModalScreen/>;
         case 'Bottom_Sheet':
             return <Bottomcreen />;
 
@@ -47,7 +47,7 @@ export default function MenuScreen() {
                     <Button onPress={() => setScreen('ScrollView')} title={'Practica: ScrollView'} color={'orange'} />
                     <Button onPress={() => setScreen('ActivityIndicator')} title={'Practica: Activity Indicator'} color={'purple'} />
                     <Button onPress={() => setScreen('FlatList')} title={'Practica: FlatList'} color={'brown'} />
-                    <Button onPress={() => setScreen('Modal')} title={'Practica: Modal'} color={'pink'} />
+                    <Button onPress={() => setScreen('ModalScreen')} title={'Practica: ModalScreen'} color={'pink'} />
                     <Button onPress={() => setScreen('Bottom_Sheet')} title={'Practica: Bottom Sheet'} color={'gray'} />
                 </View>
             );
