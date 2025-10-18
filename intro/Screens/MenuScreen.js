@@ -1,6 +1,6 @@
 //1. imports: Zonas de importaciones
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
 import ContadorScreen from "./contadorScreen";
 import BotonesScreen from "./BotonesScreen";
 import TextScreen from "./TextScreen";
@@ -39,16 +39,34 @@ export default function MenuScreen() {
         default:
             return (
                 <View style={styles.container}>
-                    <Text>Menu de practicas</Text>
-                    <Button onPress={() => setScreen('contador')} title={'Practica: Contador'} color={'red'} />
-                    <Button onPress={() => setScreen('botones')} title={'Practica: Buttons'} color={'green'} />
-                    <Button onPress={() => setScreen('Text_Input')} title={'Practica: Text Input'} color={'blue'} />
-                    <Button onPress={() => setScreen('ImageBackground')} title={'Practica: Image Background'} color={'yellow'} />
-                    <Button onPress={() => setScreen('ScrollView')} title={'Practica: ScrollView'} color={'orange'} />
-                    <Button onPress={() => setScreen('ActivityIndicator')} title={'Practica: Activity Indicator'} color={'purple'} />
-                    <Button onPress={() => setScreen('FlatList')} title={'Practica: FlatList'} color={'brown'} />
-                    <Button onPress={() => setScreen('ModalScreen')} title={'Practica: ModalScreen'} color={'pink'} />
-                    <Button onPress={() => setScreen('Bottom_Sheet')} title={'Practica: Bottom Sheet'} color={'gray'} />
+                    <Text style={styles.title}>Menu de practicas</Text>
+                    <Pressable style={styles.button} onPress={() => setScreen('contador')}>
+                        <Text style={styles.buttonText}>Practica: Contador</Text>
+                    </Pressable>
+                    <Pressable style={styles.button} onPress={() => setScreen('botones')}>
+                        <Text style={styles.buttonText}>Practica: Buttons</Text>
+                    </Pressable>
+                    <Pressable style={styles.button} onPress={() => setScreen('Text_Input')}>
+                        <Text style={styles.buttonText}>Practica: Text Input</Text>
+                    </Pressable>
+                    <Pressable style={styles.button} onPress={() => setScreen('ImageBackground')}>
+                        <Text style={styles.buttonText}>Practica: Image Background</Text>
+                    </Pressable>
+                    <Pressable style={styles.button} onPress={() => setScreen('ScrollView')}>
+                        <Text style={styles.buttonText}>Practica: ScrollView</Text>
+                    </Pressable>
+                    <Pressable style={styles.button} onPress={() => setScreen('ActivityIndicator')}>
+                        <Text style={styles.buttonText}>Practica: Activity Indicator</Text>
+                    </Pressable>
+                    <Pressable style={styles.button} onPress={() => setScreen('FlatList')}>
+                        <Text style={styles.buttonText}>Practica: FlatList</Text>
+                    </Pressable>
+                    <Pressable style={styles.button} onPress={() => setScreen('ModalScreen')}>
+                        <Text style={styles.buttonText}>Practica: ModalScreen</Text>
+                    </Pressable>
+                    <Pressable style={styles.button} onPress={() => setScreen('Bottom_Sheet')}>
+                        <Text style={styles.buttonText}>Practica: Bottom Sheet</Text>
+                    </Pressable>
                 </View>
             );
     }
@@ -61,6 +79,24 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
         alignItems: 'center', //eje x
         justifyContent: 'center', //eje y
-        gap: 20,
+        gap: 2,
+    },
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 20,
+    },
+    button: {
+        width: 350,
+        paddingVertical: 10,
+        backgroundColor: '#0069d9',
+        borderRadius: 5,
+        alignItems: 'center',
+        marginVertical: 5,
+    },
+    buttonText: {
+        color: '#ffffff',
+        fontSize: 16,
+        fontWeight: 'bold',
     },
 });
