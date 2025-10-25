@@ -10,6 +10,7 @@ import ActivityIndicatorScreen from "./ActivityIndicatorScreen";
 import FlatListScreen from "./FlatListScreen";
 import Bottomcreen from "./BottomScreen";
 import ModalScreen from "./ModalScreen";
+import LoginScreen from "./LoginScreen";
 
 //2. Main: Zona de componentes
 export default function MenuScreen() {
@@ -35,6 +36,8 @@ export default function MenuScreen() {
             return <ModalScreen/>;
         case 'Bottom_Sheet':
             return <Bottomcreen />;
+        case 'Login':
+            return <LoginScreen/>;
 
         default:
             return (
@@ -66,6 +69,9 @@ export default function MenuScreen() {
                     </Pressable>
                     <Pressable style={styles.button} onPress={() => setScreen('Bottom_Sheet')}>
                         <Text style={styles.buttonText}>Practica: Bottom Sheet</Text>
+                    </Pressable>
+                    <Pressable style={styles.button} onPress={() => setScreen('Login')}>
+                        <Text style={styles.buttonText}>Repaso 1</Text>
                     </Pressable>
                 </View>
             );
