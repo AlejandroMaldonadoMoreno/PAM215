@@ -6,6 +6,7 @@ export default function ScrollViewScreen() {
     const irAlFinal = () =>{
         scrollRef.current.scrollToEnd({animated: true});
     }
+    
     return (
         <ScrollView
             ref={scrollRef}
