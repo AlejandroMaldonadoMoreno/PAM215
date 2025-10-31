@@ -10,7 +10,19 @@ export default function LoginScreen() {
     const [correo, setCorreo] = useState('');
     const [contrasenia, setContrasenia] = useState('');
 
-    
+    const validacionLogin=()=>{
+        if(correo.trim() === '' || contrasenia.trim() === ''){
+            Alert.alert("Error los campos estan en blanco (Móvil)");
+            return false;
+        }
+        if(!correo.includes('@') || !correo.includes('.')){
+            Alert.alert("El correo no es valido (Móvil)");
+            return false;
+        }
+
+        Alert.alert('Inicio de sesión exitoso', 'Bienvenido de nuevo!');
+        return true;
+    }
     const validacionRegistro=()=>{
         if(nombre.trim() === '' && apellidos.trim() === '' && telefono.trim() === '' && correo.trim() === '' && contrasenia.trim() === '' && alertas === false){
             Alert.alert("Error los campos estan en blanco (Móvil)");
