@@ -8,7 +8,7 @@ import ImageScreen from "./ImageScreen";
 import ScrollViewScreen from "./ScrollViewScreen";
 import ActivityIndicatorScreen from "./ActivityIndicatorScreen";
 import FlatListScreen from "./FlatListScreen";
-import Bottomcreen from "./BottomScreen";
+import BottomScreen from "./BottomScreen";
 import ModalScreen from "./ModalScreen";
 import LoginScreen from "./LoginScreen";
 
@@ -35,7 +35,7 @@ export default function MenuScreen() {
         case 'ModalScreen':
             return <ModalScreen/>;
         case 'Bottom_Sheet':
-            return <Bottomcreen />;
+            return <BottomScreen />;
         case 'Login':
             return <LoginScreen/>;
 
