@@ -3,7 +3,7 @@
 // vista automática
 
 import { useEffect, useState, useCallback } from 'react';
-import { View, Text, TextInput, TouchableOpacity, FlatList,StyleSheet, Alert,ActivityIndicator,Platform } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, FlatList,StyleSheet, Alert,ActivityIndicator,Platform, Modal } from 'react-native';
 import {UsuarioController} from "../controllers/UsuarioController";
 
 const controller = new UsuarioController();
@@ -14,6 +14,10 @@ export default function InsertUsuarioScreen() {
   const [nombre, setNombre] = useState('');
   const [loading, setLoading] = useState(true);
   const [guardando, setGuardando] = useState(false);
+
+  const[mostrar, setMostrar] = useState(false);
+  const [usuarioEdit, setUsuarioEdit] = useState(null);
+  const [nombreEdit, setNombreEdit] = useState('');
 
 
   //Por último, creamos el sistema de observadores que son los
@@ -99,12 +103,64 @@ export default function InsertUsuarioScreen() {
                     })}
                 </Text>
             </View>
+
+            <View style={styles.botonesContainer}>
+                <TouchableOpacity style={styles.botoneditar} onPress={()=> abrirModalEdit(item)}>
+                    <Text style={styles.textEditar}>Editar</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.botoneliminar} onPress={()=> handleEliminar(item.id)}>
+                    <Text style={styles.textEliminar}>Eliminar</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 
 
+    const abrirModalEdit = (usuario) => {
+        setUsuarioEdit(usuario);
+        setNombreEdit(usuario.nombre);
+        setMostrar(true);
+    };
 
-  return (
+    const cerrarModalEdit = () => {
+        setMostrar(false);
+        setUsuarioEdit(null);
+        setNombreEdit('');
+    };
+
+    const guardarEdicion = async () => {
+        if (!usuarioEdit) return;
+
+        try {
+            await controller.actualizarUsuario(usuarioEdit.id, nombreEdit);
+            Alert.alert('Éxito', 'Usuario actualizado correctamente');
+            cerrarModalEdit();
+        } catch (error) {
+            Alert.alert('Error', error.message);
+        }
+    };
+
+    const handleEliminar = async (id) => {
+        Alert.alert(
+            'Eliminar',
+            '¿Deseas eliminar este usuario?',
+            [
+                { text: 'Cancelar', style: 'cancel' },
+                {
+                    text: 'Eliminar',
+                    style: 'destructive',
+                    onPress: async () => {
+                        await controller.eliminarUsuario(id);
+                        Alert.alert('Eliminado', 'Usuario eliminado correctamente');
+                    },
+                },
+            ]
+        );
+    };
+
+
+    return (
     
     <View style={styles.container}>
 
@@ -182,6 +238,33 @@ export default function InsertUsuarioScreen() {
 
       </View>
 
+      <Modal
+          visible={mostrar}
+          transparent
+          animationType="slide">
+        <View style={styles.ContainerMain}>
+          <View style={styles.contenidoModal}>
+            <Text style={styles.Titulo}>Editar usuario</Text>
+
+            <TextInput
+              value={nombreEdit}
+              onChangeText={setNombreEdit}
+              style={styles.input}
+              placeholder="Nuevo nombre"
+            />
+
+            <View style={styles.botonesModal}>
+              <TouchableOpacity onPress={cerrarModalEdit}>
+                <Text style={styles.cancelartext}>Cancelar</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.botonGuardar} onPress={guardarEdicion}>
+                <Text style={styles.guardar}>Guardar</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
 
     </View>
   );
@@ -365,5 +448,81 @@ const styles = StyleSheet.create({
   bold: {
     fontWeight: 'bold',
     color: '#1976D2',
+  },
+  ContainerMain: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+  },
+  contenidoModal: {
+    width: '80%',
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    padding: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  Titulo: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 15,
+  },
+  botonesModal: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 15,
+  },
+  cancelartext: {
+    fontSize: 16,
+    color: '#666',
+  },
+  botonGuardar: {
+    backgroundColor: '#007AFF',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+  },
+  guardar: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  botonesContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  botoneditar: {
+    backgroundColor: '#e1f5fe',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+    marginRight: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  botoneliminar: {
+    backgroundColor: '#ffebee',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  textEditar: {
+    color: '#01579b',
+    fontSize: 14,
+    fontWeight: '500',
+    marginLeft: 5,
+  },
+  textEliminar: {
+    color: '#c62828',
+    fontSize: 14,
+    fontWeight: '500',
+    marginLeft: 5,
   },
 });

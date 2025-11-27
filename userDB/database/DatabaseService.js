@@ -72,8 +72,28 @@ class DatabaseService{
             };
         }
     }
+
+    async update(id, nombre){
+        await this.db.runAsync(
+            'UPDATE usuarios SET nombre = ? WHERE id = ?', [nombre, id]
+        );
+
+        const usuarioActualizado = await this.db.getFirstAsync(
+            'SELECT * FROM usuarios WHERE id = ?', [id]
+        );
+        return usuarioActualizado;
+    }
+
+    async remove(id){
+        await this.db.runAsync(
+            'DELETE FROM usuarios WHERE id = ?', [id]
+        );
+        return true;
+    }
+
 }
+
+
 
 //Exportamos la instancia  de la clase
 export default new DatabaseService();
-

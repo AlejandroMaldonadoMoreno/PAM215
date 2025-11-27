@@ -54,6 +54,26 @@ export class UsuarioController{
         }
     }
 
+    async actualizarUsuario(id, nombre){
+        Usuario.validar(nombre);
+
+        const usuarioActualizado = await DatabaseService.update(id, nombre.trim());
+
+        this.notifyListeners();
+
+        return new Usuario(
+            usuarioActualizado.id,
+            usuarioActualizado.nombre,
+            usuarioActualizado.fecha_creacion
+        );
+    }
+
+    async eliminarUsuario(id) {
+        await DatabaseService.remove(id);
+        this.notifyListeners();
+        return true;
+    }
+
     //Por último, creamos el sistema de observadores que son los
     // encargados de llevar el seguimiento y la actualización de la
     // vista automática
